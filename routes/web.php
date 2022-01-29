@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SellerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::prefix('seller')->group(function () {
+    Route::get('/login', [SellerController::class, 'index'])->name('login_form');
+    Route::get('/login/owner', [SellerController::class, 'login'])->name('seller.login');
+    Route::get('/dashboard', [SellerController::class, 'dashboard'])->name('seller.dashboard');
+});
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::prefix('seller')->group(function () {
+    Route::get('/dashboard', function () {
+        echo 'hey';
+    })->middleware('auth:seller');
+});
 
 require __DIR__.'/auth.php';
