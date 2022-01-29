@@ -19,6 +19,7 @@ class SellerController extends Controller
                 'email' => $check['email'],
                 'password' => $check['password']
         ])) {
+            // TODO: fix this hack
             Auth::guard('purchaser')->logout();
             return redirect()->route('seller.dashboard');
         } else {

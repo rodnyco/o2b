@@ -19,6 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*
+TODO:
+- merge layouts
+*/
+
 
 Route::prefix('seller')->group(function () {
     Route::get('/login', [SellerController::class, 'loginForm'])->name('login_form');
@@ -49,10 +54,5 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-//Route::prefix('seller')->group(function () {
-//    Route::get('/dashboard', function () {
-//        echo 'hey';
-//    })->middleware('auth:seller');
-//});
 
 require __DIR__.'/auth.php';
