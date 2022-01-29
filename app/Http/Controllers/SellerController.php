@@ -12,12 +12,14 @@ class SellerController extends Controller
         return view('seller.login');
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $check = $request->all();
         if(Auth::guard('seller')->attempt([
                 'email' => $check['email'],
                 'password' => $check['password']
         ])) {
+            Auth::guard('purchaser')->logout();
             return redirect()->route('seller.dashboard');
         } else {
             return back()->with('error', 'Неправильный логин или пароль');

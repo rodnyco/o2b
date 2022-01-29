@@ -78,7 +78,7 @@ return [
             'model' => App\Models\Seller::class,
         ],
 
-        'purchases' => [
+        'purchasers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Purchaser::class,
         ],

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\PurchaserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +23,25 @@ Route::get('/', function () {
 Route::prefix('seller')->group(function () {
     Route::get('/login', [SellerController::class, 'loginForm'])->name('login_form');
     Route::post('/login', [SellerController::class, 'login'])->name('seller.login');
-    Route::get('/dashboard', [SellerController::class, 'dashboard'])
-        ->name('seller.dashboard')
-        ->middleware('seller');
     Route::post('/logout', [SellerController::class, 'logout'])
         ->name('seller.logout')
         ->middleware('seller');
+
+    Route::get('/dashboard', [SellerController::class, 'dashboard'])
+        ->name('seller.dashboard')
+        ->middleware('seller');
+});
+
+Route::prefix('purchaser')->group(function () {
+    Route::get('/login', [PurchaserController::class, 'loginForm'])->name('purchaser.login_form');
+    Route::post('/login', [PurchaserController::class, 'login'])->name('purchaser.login');
+    Route::post('/logout', [PurchaserController::class, 'logout'])
+        ->name('purchaser.logout')
+        ->middleware('purchaser');
+
+    Route::get('/dashboard', [PurchaserController::class, 'dashboard'])
+        ->name('purchaser.dashboard')
+        ->middleware('purchaser');
 });
 
 

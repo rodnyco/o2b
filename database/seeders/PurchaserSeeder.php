@@ -2,17 +2,18 @@
 
 namespace Database\Seeders;
 
+use App\Models\Purchaser;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class PurchaserSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        \App\Models\Purchaser::factory(10)->create();
+        Purchaser::factory(10)->create();
     }
 }

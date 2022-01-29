@@ -12,11 +12,11 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-
         <div class="flex justify-center flex-col">
-            <h1 class="text-lg font-bold text-center">Авторизация под Продавцом</h1>
-            <p class="text-s">Вы Покупатель? <a href="{{ route('purchaser.login_form') }}" class="underline hover:underline">Авторизация под покупателем</a></p>
+            <h1 class="text-lg font-bold text-center">Авторизация под Покупателем</h1>
+            <p class="text-s">Вы продавец? <a href="{{ route('login_form') }}" class="underline hover:underline">Авторизация под продавцом</a></p>
         </div>
+
 
         @if(\Illuminate\Support\Facades\Session::has('error'))
             <div role="alert">
@@ -29,7 +29,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('seller.login') }}" class="mt-4">
+        <form method="POST" action="{{ route('purchaser.login') }}" class="mt-4">
         @csrf
 
         <!-- Email Address -->

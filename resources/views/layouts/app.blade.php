@@ -18,7 +18,16 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+
+        @if(Auth::guard('seller')->check())
+                @include('seller.layouts.navigation')
+            @elseif(Auth::guard('purchaser')->check())
+                @include('purchaser.layouts.navigation')
+            @elseif(Auth::guard('user')->check())
+                @include('layouts.navigation')
+        @endif
+
+{{--        @include('layouts.navigation')--}}
 
             <!-- Page Heading -->
             <header class="bg-white shadow">
