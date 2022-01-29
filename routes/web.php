@@ -25,6 +25,9 @@ Route::prefix('seller')->group(function () {
     Route::get('/dashboard', [SellerController::class, 'dashboard'])
         ->name('seller.dashboard')
         ->middleware('seller');
+    Route::post('/logout', [SellerController::class, 'logout'])
+        ->name('seller.logout')
+        ->middleware('seller');
 });
 
 

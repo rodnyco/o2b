@@ -28,4 +28,11 @@ class SellerController extends Controller
     {
         return view('seller.index');
     }
+
+    public function logout()
+    {
+        Auth::guard('seller')->logout();
+
+        return redirect()->route('login_form')->with('error', 'Вы вышли из аккаунта');
+    }
 }
