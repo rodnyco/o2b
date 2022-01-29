@@ -6,8 +6,13 @@ use Illuminate\Http\Request;
 
 class SellerController extends Controller
 {
-    public function index()
+    public function login()
     {
-        return view();
+        return view('seller.login');
+    }
+
+    public function dashboard()
+    {
+        return view('seller.index');
     }
 }
