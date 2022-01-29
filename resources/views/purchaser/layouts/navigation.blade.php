@@ -18,11 +18,6 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link >
-                        {{ __('Мои товары') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link >
                         {{ __('Мои аукционы') }}
                     </x-nav-link>
                 </div>
@@ -79,7 +74,7 @@
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link>
-                {{ __('Мои товары') }}
+                {{ __('Мои аукционы') }}
             </x-responsive-nav-link>
         </div>
 
