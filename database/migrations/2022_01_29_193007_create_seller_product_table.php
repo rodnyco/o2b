@@ -14,12 +14,14 @@ class CreateSellerProductTable extends Migration
     public function up()
     {
         Schema::create('seller_product', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('seller_id');
+            $table->unsignedBigInteger('product_id');
+            $table->timestamps();
             $table->foreign('seller_id')->references('id')->on('sellers')
                 ->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')
                 ->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
