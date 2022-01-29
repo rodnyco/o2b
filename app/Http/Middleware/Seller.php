@@ -18,7 +18,7 @@ class Seller
     public function handle(Request $request, Closure $next)
     {
         if(!Auth::guard('seller')->check()) {
-            return redirect()->route('login_form')->with('error', 'Plz login');
+            return redirect()->route('login_form')->with('error', 'Для перехода на страницу профиля необходимо сначана войти');
         }
 
         return $next($request);

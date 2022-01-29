@@ -20,9 +20,11 @@ Route::get('/', function () {
 
 
 Route::prefix('seller')->group(function () {
-    Route::get('/login', [SellerController::class, 'login'])->name('login_form');
-    Route::get('/login/owner', [SellerController::class, 'login'])->name('seller.login');
-    Route::get('/dashboard', [SellerController::class, 'dashboard'])->name('seller.dashboard');
+    Route::get('/login', [SellerController::class, 'loginForm'])->name('login_form');
+    Route::post('/login', [SellerController::class, 'login'])->name('seller.login');
+    Route::get('/dashboard', [SellerController::class, 'dashboard'])
+        ->name('seller.dashboard')
+        ->middleware('seller');
 });
 
 
