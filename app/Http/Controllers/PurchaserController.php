@@ -28,15 +28,20 @@ class PurchaserController extends Controller
         }
     }
 
-    public function dashboard()
-    {
-        return view('purchaser.index');
-    }
-
     public function logout()
     {
         Auth::guard('purchaser')->logout();
 
         return redirect()->route('purchaser.login_form')->with('error', 'Вы вышли из аккаунта');
+    }
+
+    public function dashboard()
+    {
+        return view('purchaser.index');
+    }
+
+    public function auctionsPage()
+    {
+        return view('purchaser.auctions.index');
     }
 }

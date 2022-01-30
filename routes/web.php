@@ -58,6 +58,9 @@ Route::prefix('purchaser')->group(function () {
     Route::get('/dashboard', [PurchaserController::class, 'dashboard'])
         ->name('purchaser.dashboard')
         ->middleware('purchaser');
+    Route::get('/auctions', [PurchaserController::class, 'auctionsPage'])
+        ->name('purchaser.auctions')
+        ->middleware('purchaser');
 });
 
 
