@@ -46,7 +46,7 @@
                                                         {{ $product->unit }}
                                                     </td>
                                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        154.01
+                                                        {{ $product->product_price }}
                                                     </td>
                                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         {{ $product->description }}
