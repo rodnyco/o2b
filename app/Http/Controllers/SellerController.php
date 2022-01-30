@@ -43,17 +43,12 @@ class SellerController extends Controller
 
     public function productsPage()
     {
-        // $products = Auth::guard('seller')->user()->products;
-
         $products = DB::table('seller_product')
                 ->where('seller_id', '=', Auth::guard('seller')->user()->id)
                 ->join('products', 'seller_product.product_id', '=', 'products.id')
                 ->select('seller_product.*', 'products.*')
                 ->get();
 
-//        dd($rq);
-//        die();
-
-        return view('seller.products', compact('products'));
+        return view('seller.products.index', compact('products'));
     }
 }

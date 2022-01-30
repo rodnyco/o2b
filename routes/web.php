@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\PurchaserController;
+use App\Http\Controllers\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,9 @@ Route::prefix('seller')->group(function () {
         ->middleware('seller');
     Route::get('/products', [SellerController::class, 'productsPage'])
         ->name('seller.productsPage')
+        ->middleware('seller');
+    Route::get('/products/create', [ProductsController::class, 'createForm'])
+        ->name('seller.products.createForm')
         ->middleware('seller');
 });
 
