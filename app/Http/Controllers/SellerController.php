@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SellerController extends Controller
 {
@@ -37,5 +39,16 @@ class SellerController extends Controller
         Auth::guard('seller')->logout();
 
         return redirect()->route('login_form')->with('error', 'Вы вышли из аккаунта');
+    }
+
+    public function productsPage()
+    {
+        $products = DB::table('seller_product')
+                ->where('seller_id', '=', Auth::guard('seller')->user()->id)
+                ->join('products', 'seller_product.product_id', '=', 'products.id')
+                ->select('seller_product.*', 'products.*')
+                ->get();
+
+        return view('seller.products.index', compact('products'));
     }
 }
