@@ -35,6 +35,9 @@ Route::prefix('seller')->group(function () {
     Route::get('/dashboard', [SellerController::class, 'dashboard'])
         ->name('seller.dashboard')
         ->middleware('seller');
+    Route::get('/products', [SellerController::class, 'productsPage'])
+        ->name('seller.productsPage')
+        ->middleware('seller');
 });
 
 Route::prefix('purchaser')->group(function () {
