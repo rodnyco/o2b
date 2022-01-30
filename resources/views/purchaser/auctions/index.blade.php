@@ -11,7 +11,7 @@
                     <div class="bg-white rounded-md w-full">
                         <div>
                             <div>
-                                <a href="{{ route('seller.products.createForm') }}">
+                                <a href="{{ route('purchaser.auctions.createForm') }}">
                                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         Создать аукцион
                                     </button>
