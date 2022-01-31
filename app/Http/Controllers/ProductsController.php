@@ -39,4 +39,11 @@ class ProductsController extends Controller
 
         return redirect(route('seller.productsPage'));
     }
+
+    public function search(Request $request)
+    {
+        $posts = Product::where('title', 'like', '%'.$request->keywords.'%')->get();
+
+        return response()->json($posts);
+    }
 }
