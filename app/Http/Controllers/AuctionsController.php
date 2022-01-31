@@ -10,4 +10,9 @@ class AuctionsController extends Controller
     {
         return view('purchaser.auctions.create');
     }
+
+    public function store(Request $request)
+    {
+        return redirect(route('purchaser.auctions'));
+    }
 }
