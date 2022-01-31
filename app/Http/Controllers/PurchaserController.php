@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PurchaserController extends Controller
 {
@@ -42,6 +43,12 @@ class PurchaserController extends Controller
 
     public function auctionsPage()
     {
-        return view('purchaser.auctions.index');
+        $auctions = DB::table('auctions')
+            ->where('purchaser_id', '=', Auth::guard('purchaser')->user()->id)
+            ->join('products', 'auctions.product_id', '=', 'products.id')
+            ->select('auctions.*', 'products.title as product_title', 'products.unit as product_unit')
+            ->get();
+
+        return view('purchaser.auctions.index', compact('auctions'));
     }
 }
