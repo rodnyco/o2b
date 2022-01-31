@@ -1755,7 +1755,7 @@ function startsWithEndTagOpen(source, tag) {
 }
 
 function hoistStatic(root, context) {
-    walk(root, context,
+    walk(root, context, 
     // Root node is unfortunately non-hoistable due to potential parent
     // fallthrough attributes.
     isSingleElementRoot(root, root.children[0]));
@@ -3036,7 +3036,7 @@ const transformExpression = (node, context) => {
                 if (exp &&
                     exp.type === 4 /* SIMPLE_EXPRESSION */ &&
                     !(dir.name === 'on' && arg)) {
-                    dir.exp = processExpression(exp, context,
+                    dir.exp = processExpression(exp, context, 
                     // slot args must be processed as function params
                     dir.name === 'slot');
                 }
@@ -3050,10 +3050,10 @@ const transformExpression = (node, context) => {
 // Important: since this function uses Node.js only dependencies, it should
 // always be used with a leading !true check so that it can be
 // tree-shaken from the browser build.
-function processExpression(node, context,
+function processExpression(node, context, 
 // some expressions like v-slot props & v-for aliases should be parsed as
 // function params
-asParams = false,
+asParams = false, 
 // v-on handler values may contain multiple statements
 asRawStatements = false, localVars = Object.create(context.identifiers)) {
     {
@@ -3194,7 +3194,7 @@ function createIfBranch(node, dir) {
 }
 function createCodegenNodeForBranch(branch, keyIndex, context) {
     if (branch.condition) {
-        return createConditionalExpression(branch.condition, createChildrenCodegenNode(branch, keyIndex, context),
+        return createConditionalExpression(branch.condition, createChildrenCodegenNode(branch, keyIndex, context), 
         // make sure to pass in asBlock: true so that the comment node call
         // closes the current block.
         createCallExpression(context.helper(CREATE_COMMENT), [
@@ -3708,7 +3708,7 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
         : hasForwardedSlots(node.children)
             ? 3 /* FORWARDED */
             : 1 /* STABLE */;
-    let slots = createObjectExpression(slotsProperties.concat(createObjectProperty(`_`,
+    let slots = createObjectExpression(slotsProperties.concat(createObjectProperty(`_`, 
     // 2 = compiled but dynamic = can skip normalization, but must run diff
     // 1 = compiled and static = can skip normalization AND diff as optimized
     createSimpleExpression(slotFlag + (( true) ? ` /* ${_vue_shared__WEBPACK_IMPORTED_MODULE_0__.slotFlagsText[slotFlag]} */` : 0), false))), loc);
@@ -3789,7 +3789,7 @@ const transformElement = (node, context) => {
         let vnodeDynamicProps;
         let dynamicPropNames;
         let vnodeDirectives;
-        let shouldUseBlock =
+        let shouldUseBlock = 
         // dynamic component may resolve to plain elements
         isDynamicComponent ||
             vnodeTag === TELEPORT ||
@@ -6254,7 +6254,7 @@ function compile(template, options = {}) {
             ...(options.nodeTransforms || [])
         ],
         directiveTransforms: (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)({}, DOMDirectiveTransforms, options.directiveTransforms || {}),
-        transformHoist: null
+        transformHoist: null 
     }));
 }
 function parse(template, options = {}) {
@@ -7689,9 +7689,9 @@ function devtoolsUnmountApp(app) {
     emit("app:unmount" /* APP_UNMOUNT */, app);
 }
 const devtoolsComponentAdded = /*#__PURE__*/ createDevtoolsComponentHook("component:added" /* COMPONENT_ADDED */);
-const devtoolsComponentUpdated =
+const devtoolsComponentUpdated = 
 /*#__PURE__*/ createDevtoolsComponentHook("component:updated" /* COMPONENT_UPDATED */);
-const devtoolsComponentRemoved =
+const devtoolsComponentRemoved = 
 /*#__PURE__*/ createDevtoolsComponentHook("component:removed" /* COMPONENT_REMOVED */);
 function createDevtoolsComponentHook(hook) {
     return (component) => {
@@ -8225,7 +8225,7 @@ const SuspenseImpl = {
     // on a vnode's type and calls the `process` method, passing in renderer
     // internals.
     __isSuspense: true,
-    process(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized,
+    process(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, 
     // platform-specific impl passed from renderer
     rendererInternals) {
         if (n1 == null) {
@@ -8530,11 +8530,11 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
                     vnode.el = hydratedEl;
                 }
                 const placeholder = !hydratedEl && instance.subTree.el;
-                setupRenderEffect(instance, vnode,
+                setupRenderEffect(instance, vnode, 
                 // component may have been moved before resolve.
                 // if this is not a hydration, instance.subTree will be the comment
                 // placeholder.
-                parentNode(hydratedEl || instance.subTree.el),
+                parentNode(hydratedEl || instance.subTree.el), 
                 // anchor will not be used if this is hydration, so only need to
                 // consider the comment placeholder case.
                 hydratedEl ? null : next(instance.subTree), suspense, isSVG, optimized);
@@ -9520,7 +9520,7 @@ const KeepAliveImpl = {
         watch(() => [props.include, props.exclude], ([include, exclude]) => {
             include && pruneCache(name => matches(include, name));
             exclude && pruneCache(name => !matches(exclude, name));
-        },
+        }, 
         // prune post-render after `current` has been updated
         { flush: 'post', deep: true });
         // cache sub tree after render
@@ -9741,7 +9741,7 @@ function injectHook(type, hook, target = currentInstance, prepend = false) {
                 ));
     }
 }
-const createHook = (lifecycle) => (hook, target = currentInstance) =>
+const createHook = (lifecycle) => (hook, target = currentInstance) => 
 // post-create lifecycle registrations are noops during SSR (except for serverPrefetch)
 (!isInSSRComponentSetup || lifecycle === "sp" /* SERVER_PREFETCH */) &&
     injectHook(lifecycle, hook, target);
@@ -9781,13 +9781,13 @@ function applyOptions(instance) {
     if (options.beforeCreate) {
         callHook(options.beforeCreate, instance, "bc" /* BEFORE_CREATE */);
     }
-    const {
+    const { 
     // state
-    data: dataOptions, computed: computedOptions, methods, watch: watchOptions, provide: provideOptions, inject: injectOptions,
+    data: dataOptions, computed: computedOptions, methods, watch: watchOptions, provide: provideOptions, inject: injectOptions, 
     // lifecycle
-    created, beforeMount, mounted, beforeUpdate, updated, activated, deactivated, beforeDestroy, beforeUnmount, destroyed, unmounted, render, renderTracked, renderTriggered, errorCaptured, serverPrefetch,
+    created, beforeMount, mounted, beforeUpdate, updated, activated, deactivated, beforeDestroy, beforeUnmount, destroyed, unmounted, render, renderTracked, renderTriggered, errorCaptured, serverPrefetch, 
     // public API
-    expose, inheritAttrs,
+    expose, inheritAttrs, 
     // assets
     components, directives, filters } = options;
     const checkDuplicateProperties = ( true) ? createDuplicateChecker() : 0;
@@ -11821,7 +11821,7 @@ function baseCreateRenderer(options, createHydrationFns) {
             const oldVNode = oldChildren[i];
             const newVNode = newChildren[i];
             // Determine the container (parent element) for the patch.
-            const container =
+            const container = 
             // oldVNode may be an errored async setup() component inside Suspense
             // which will not have a mounted element
             oldVNode.el &&
@@ -12138,9 +12138,9 @@ function baseCreateRenderer(options, createHydrationFns) {
                 if ((true)) {
                     startMeasure(instance, `patch`);
                 }
-                patch(prevTree, nextTree,
+                patch(prevTree, nextTree, 
                 // parent may have changed if it's in a teleport
-                hostParentNode(prevTree.el),
+                hostParentNode(prevTree.el), 
                 // anchor may have changed if it's in a fragment
                 getNextHostNode(prevTree), instance, parentSuspense, isSVG);
                 if ((true)) {
@@ -13018,7 +13018,7 @@ function resolveAsset(type, name, warnMissing = true, maybeSelfReference = false
                 return Component;
             }
         }
-        const res =
+        const res = 
         // local registration
         // check instance[type] first which is resolved for options API
         resolve(instance[type] || Component[type], name) ||
@@ -13390,7 +13390,7 @@ function createStaticVNode(content, numberOfNodes) {
 /**
  * @private
  */
-function createCommentVNode(text = '',
+function createCommentVNode(text = '', 
 // when used as the v-else branch, the comment node must be created as a
 // block to ensure correct updates.
 asBlock = false) {
@@ -13405,7 +13405,7 @@ function normalizeVNode(child) {
     }
     else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(child)) {
         // fragment
-        return createVNode(Fragment, null,
+        return createVNode(Fragment, null, 
         // #3666, avoid reference pollution when reusing vnode
         child.slice());
     }
@@ -13588,7 +13588,7 @@ function createSlots(slots, dynamicSlots) {
  * Compiler runtime helper for rendering `<slot/>`
  * @private
  */
-function renderSlot(slots, name, props = {},
+function renderSlot(slots, name, props = {}, 
 // this is not a user-facing function, so the fallback is always generated by
 // the compiler and guaranteed to be a function returning an array
 fallback, noSlotted) {
@@ -17028,7 +17028,7 @@ function patchAttr(el, key, value, isSVG, instance) {
 
 // __UNSAFE__
 // functions. The user is responsible for using them with only trusted content.
-function patchDOMProp(el, key, value,
+function patchDOMProp(el, key, value, 
 // the following args are passed only due to potential innerHTML/textContent
 // overriding existing VNodes, in which case the old tree must be properly
 // unmounted.
@@ -19161,10 +19161,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['createRoute'],
   data: function data() {
     return {
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       keywords: null,
       selected: null,
       count: 0,
@@ -19213,51 +19211,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = ["action"];
-var _hoisted_2 = ["value"];
-var _hoisted_3 = {
+var _hoisted_1 = {
   "class": "mb-4 relative"
 };
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "block text-gray-700 text-sm font-bold mb-2",
   "for": "product"
 }, " Товар для аукциона: ", -1
 /* HOISTED */
 );
 
-var _hoisted_5 = ["value"];
-var _hoisted_6 = {
-  key: 1,
+var _hoisted_3 = {
+  key: 0,
   "class": "absolute w-full"
 };
-var _hoisted_7 = ["onClick", "textContent"];
-var _hoisted_8 = {
+var _hoisted_4 = ["onClick", "textContent"];
+var _hoisted_5 = {
   "class": "flex flex-wrap -mx-3 mb-2"
 };
-var _hoisted_9 = {
+var _hoisted_6 = {
   "class": "w-full md:w-1/2"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-  "for": "count"
+  "for": "grid-city"
 }, " Количество ", -1
 /* HOISTED */
 );
 
-var _hoisted_11 = {
+var _hoisted_8 = {
   "class": "w-full md:w-1/2 ml-3"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
   "for": "unit"
 }, " Единица измерения ", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = {
+var _hoisted_10 = {
   key: 1,
   readonly: "",
   value: "",
@@ -19266,45 +19261,19 @@ var _hoisted_13 = {
   type: "text",
   placeholder: ""
 };
-var _hoisted_14 = {
+var _hoisted_11 = {
   "class": "mb-2"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-  "for": "description"
+  "for": "grid-city"
 }, " Требования к товару ", -1
 /* HOISTED */
 );
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "submit",
-  "class": "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-}, " Создать аукцион ")], -1
-/* HOISTED */
-);
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
-    action: $props.createRoute,
-    onSubmit: _cache[4] || (_cache[4] = function () {
-      return _ctx.checkForm && _ctx.checkForm.apply(_ctx, arguments);
-    }),
-    method: "POST"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "hidden",
-    name: "_token",
-    value: $data.csrf
-  }, null, 8
-  /* PROPS */
-  , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, $data.selected != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
-    key: 0,
-    type: "hidden",
-    name: "product_id",
-    value: $data.selected.id
-  }, null, 8
-  /* PROPS */
-  , _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     name: "product",
     type: "text",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -19313,7 +19282,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.keywords]]), $data.results.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.results, function (result) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.keywords]]), $data.results.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.results, function (result) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
       onClick: function onClick($event) {
         return $options.select(result);
@@ -19323,24 +19292,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(result.title)
     }, null, 8
     /* PROPS */
-    , _hoisted_7);
+    , _hoisted_4);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.count = $event;
     }),
-    name: "count",
     "class": "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-    id: "count",
+    id: "grid-city",
     type: "text",
     placeholder: ""
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.count]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, $data.selected != null ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.count]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, $data.selected != null ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
     readonly: "",
-    name: "unit",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.selected.unit = $event;
     }),
@@ -19350,19 +19317,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: ""
   }, null, 512
   /* NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.selected.unit]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", _hoisted_13))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.selected.unit]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", _hoisted_10))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.description = $event;
     }),
-    name: "description",
-    id: "description",
     "class": "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+    name: "",
+    id: "",
     rows: "5"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.description]])]), _hoisted_16], 40
-  /* PROPS, HYDRATE_EVENTS */
-  , _hoisted_1);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.description]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
+      return $options.fetchCreate();
+    }),
+    "class": "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
+    type: "button"
+  }, " Создать аукцион ")])], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -19426,7 +19399,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateAuctionFormComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateAuctionFormComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CreateAuctionFormComponent.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CreateAuctionFormComponent.vue?vue&type=script&lang=js");
-
+ 
 
 /***/ }),
 
@@ -20332,7 +20305,7 @@ const getGlobalThis = () => {
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -20346,14 +20319,14 @@ const getGlobalThis = () => {
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
@@ -20366,7 +20339,7 @@ const getGlobalThis = () => {
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -20378,12 +20351,12 @@ const getGlobalThis = () => {
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -20394,14 +20367,14 @@ const getGlobalThis = () => {
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!***************************************!*\
-  !*** ./resources/js/auctionCreate.js ***!
-  \***************************************/
+/*!******************************!*\
+  !*** ./resources/js/comp.js ***!
+  \******************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _components_CreateAuctionFormComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/CreateAuctionFormComponent.vue */ "./resources/js/components/CreateAuctionFormComponent.vue");
@@ -20411,6 +20384,5 @@ var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
 app.component("auction-create-form", _components_CreateAuctionFormComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]).mount('#app');
 })();
 
->>>>>>> 2ca45cdaf0c60fe23b0bceeed3e1b2e42b2b9312
 /******/ })()
 ;
