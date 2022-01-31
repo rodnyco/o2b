@@ -17,4 +17,4 @@ mix.js('resources/js/app.js', 'public/js').vue().postCss('resources/css/app.css'
     require('autoprefixer'),
 ]);
 
-mix.js('resources/js/comp.js', 'public/js').vue();
+mix.js('resources/js/auctionCreate.js', 'public/js').vue();
