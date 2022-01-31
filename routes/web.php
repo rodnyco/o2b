@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\PurchaserController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\AuctionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,15 @@ Route::prefix('purchaser')->group(function () {
     Route::get('/dashboard', [PurchaserController::class, 'dashboard'])
         ->name('purchaser.dashboard')
         ->middleware('purchaser');
+    Route::get('/auctions', [PurchaserController::class, 'auctionsPage'])
+        ->name('purchaser.auctions')
+        ->middleware('purchaser');
+    Route::get('/auctions/create', [AuctionsController::class, 'createForm'])
+        ->name('purchaser.auctions.createForm')
+        ->middleware('purchaser');
+    Route::post('/auctions/create', [AuctionsController::class, 'store'])
+        ->name('purchaser.auctions.create')
+        ->middleware('purchaser');
 });
 
 
@@ -65,5 +75,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
+Route::get('/api/search', [ProductsController::class, 'search'])->middleware('purchaser');
 
 require __DIR__.'/auth.php';
