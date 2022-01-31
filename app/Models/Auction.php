@@ -20,6 +20,7 @@ class Auction extends Model
         'product_id',
         'count',
         'description',
-        'status'
+        'status',
+        'purchaser_id'
     ];
 }

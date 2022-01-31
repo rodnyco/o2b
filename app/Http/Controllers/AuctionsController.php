@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Auction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuctionsController extends Controller
 {
@@ -19,11 +20,13 @@ class AuctionsController extends Controller
             'count' => ['required'],
             'unit' => ['required', 'string'],
         ]);
-
+//        echo Auth::guard('purchaser')->user()->id;
+//        die();
         Auction::create([
             'product_id' => $request->product_id,
             'count' => $request->count,
             'description' => $request->description,
+            'purchaser_id' => Auth::guard('purchaser')->user()->id,
         ]);
 
         return redirect(route('purchaser.auctions'));
