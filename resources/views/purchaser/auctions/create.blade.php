@@ -20,9 +20,4 @@
     </div>
 </x-app-layout>
 
-<script>
-    import TestComponent from "../../../js/components/TestComponent";
-    export default {
-        components: {TestComponent}
-    }
-</script>
+<script src="{{ asset('js/comp.js') }}" defer></script>
