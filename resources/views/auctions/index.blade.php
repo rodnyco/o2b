@@ -4,10 +4,5 @@
             {{ __('Аукционы') }}
         </h2>
     </x-slot>
-    <div class="flex h-screen">
-        <div class="m-auto">
-            <h1 class="text-6xl text-center font-thin">Аукционы</h1>
-            <span class="text-center text-lg">Встречайте. <span class="font-bold">О!Подворье</span> для бизнеса</span>
-        </div>
-    </div>
+    <div>Auctions</div>
 </x-app-layout>

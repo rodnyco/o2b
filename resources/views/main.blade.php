@@ -1,13 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('О!Подворье для бизнеса') }}
+            {{ __('Главная') }}
         </h2>
     </x-slot>
-    <div class="flex h-screen">
-        <div class="m-auto">
-            <h1 class="text-6xl text-center font-thin">O2B</h1>
-            <span class="text-center text-lg">Встречайте. <span class="font-bold">О!Подворье</span> для бизнеса</span>
-        </div>
-    </div>
+    <span class="text-center text-lg text-6xl text-center font-thin">Встречайте. <span class="font-bold">О!Подворье</span> для бизнеса</span>
 </x-app-layout>
