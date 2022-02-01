@@ -1,14 +1,20 @@
 <template>
-    <div>{{ name }} component</div>
+    <div>component</div>
 </template>
 
 <script>
 export default {
     data () {
         return {
-            name: 'Auction list'
+            auctions: []
         }
-    }
+    },
+    created() {
+        axios.get('/api/auctions')
+            .then(response => {
+                this.auctions = response.data;
+            });
+    },
 }
 </script>
 

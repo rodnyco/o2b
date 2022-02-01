@@ -31,4 +31,12 @@ class AuctionsController extends Controller
 
         return redirect(route('purchaser.auctions'));
     }
+
+    public function getAll(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $auctions = Auction::all();
+
+        return response()->json($auctions);
+    }
+
 }

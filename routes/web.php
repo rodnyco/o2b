@@ -88,6 +88,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-Route::get('/api/search', [ProductsController::class, 'search'])->middleware('purchaser');
+Route::get('/api/search', [ProductsController::class, 'search'])
+    ->middleware('purchaser')
+    ->middleware('ajax');
+
+Route::get('/api/auctions', [AuctionsController::class, 'getAll'])
+            ->middleware('ajax');
 
 require __DIR__.'/auth.php';
