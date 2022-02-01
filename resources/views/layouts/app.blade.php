@@ -19,22 +19,20 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
 
-        @if(Auth::guard('seller')->check())
-                @include('seller.layouts.navigation')
-            @elseif(Auth::guard('purchaser')->check())
-                @include('purchaser.layouts.navigation')
-            @elseif(Auth::guard('user')->check())
-                @include('layouts.navigation')
-        @endif
+{{--        @if(Auth::guard('seller')->check())--}}
+{{--                @include('seller.layouts.navigation')--}}
+{{--            @elseif(Auth::guard('purchaser')->check())--}}
+{{--                @include('purchaser.layouts.navigation')--}}
+{{--        @endif--}}
 
 {{--        @include('layouts.navigation')--}}
-
+        @include('layouts.nav')
             <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+{{--            <header class="bg-white shadow">--}}
+{{--                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">--}}
+{{--                    {{ $header }}--}}
+{{--                </div>--}}
+{{--            </header>--}}
 
             <!-- Page Content -->
             <main id="app">

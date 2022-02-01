@@ -18,8 +18,20 @@ use App\Http\Controllers\AuctionsController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('main');
+})->name('main');
+
+Route::get('/auctions', function () {
+    return view('auctions.index');
+})->name('auctions');
+
+Route::get('/products', function () {
+    return view('products.index');
+})->name('products');
+
+Route::get('/sellers', function () {
+    return view('sellers.index');
+})->name('sellers');
 
 /*
 TODO:
