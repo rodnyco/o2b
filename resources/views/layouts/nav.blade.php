@@ -20,6 +20,12 @@
                     <x-nav-link :href="route('sellers')" :active="request()->routeIs('sellers')">
                         {{ __('Продавцы') }}
                     </x-nav-link>
+                    @auth('seller')
+                        @include('seller.layouts.nav')
+                    @endauth
+                    @auth('purchaser')
+                        @include('purchaser.layouts.nav')
+                    @endauth
                 </div>
             </div>
             <!-- Settings Dropdown -->
@@ -30,13 +36,13 @@
                             {{--                                <div>{{ Auth::guard('seller')->user()->name }}</div>--}}
 
                             @auth('seller')
-                                <div>Имя seller</div>
+                                <div>{{  Auth::guard('seller')->user()->name }}</div>
                             @endauth
                             @auth("purchaser")
-                                <div>Имя purchaser</div>
+                                <div>{{  Auth::guard('purchaser')->user()->name }}</div>
                             @endauth
                             @if(!Auth::guard('seller')->check() && !Auth::guard('purchaser')->check())
-                                <div>Имя guest</div>
+                                <div>Вход</div>
                             @endif
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -48,16 +54,52 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('purchaser.logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('purchaser.logout')"
-                                             onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Выход') }}
+                        @if(!Auth::guard('seller')->check() && !Auth::guard('purchaser')->check())
+                            <x-dropdown-link :href="route('purchaser.login_form')">
+                                {{ __('Войти как покупатель') }}
                             </x-dropdown-link>
-                        </form>
+                            <x-dropdown-link :href="route('login_form')">
+                                {{ __('Войти как продавец') }}
+                            </x-dropdown-link>
+                        @endif
+
+                        @auth('seller')
+                            <x-dropdown-link :href="route('seller.dashboard')">
+                                {{ __('Личный кабинет') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('seller.dashboard')">
+                                {{ __('Настройки') }}
+                            </x-dropdown-link>
+                            <form method="POST" action="{{ route('seller.logout') }}">
+                                @csrf
+
+                                <x-dropdown-link :href="route('seller.logout')"
+                                                 onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    {{ __('Выход') }}
+                                </x-dropdown-link>
+                            </form>
+                        @endauth
+
+                        @auth('purchaser')
+                            <x-dropdown-link :href="route('purchaser.dashboard')">
+                                {{ __('Личный кабинет') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('purchaser.dashboard')">
+                                {{ __('Настройки') }}
+                            </x-dropdown-link>
+                            <form method="POST" action="{{ route('purchaser.logout') }}">
+                                @csrf
+
+                                <x-dropdown-link :href="route('purchaser.logout')"
+                                                 onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    {{ __('Выход') }}
+                                </x-dropdown-link>
+                            </form>
+                        @endauth
                     </x-slot>
+
                 </x-dropdown>
             </div>
         </div>
