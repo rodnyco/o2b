@@ -4,5 +4,9 @@
             {{ __('Аукционы') }}
         </h2>
     </x-slot>
-    <div>Auctions</div>
+    <div>
+        <auction-list></auction-list>
+    </div>
 </x-app-layout>
+
+<script src="{{ asset('js/auctionList.js') }}" defer></script>
