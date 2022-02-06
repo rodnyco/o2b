@@ -1,5 +1,7 @@
 <template>
-    <div>component</div>
+    <div v-for="auction in auctions">
+        {{ auction.title }}  {{ auction.product_title }}
+    </div>
 </template>
 
 <script>

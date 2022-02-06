@@ -21,9 +21,13 @@ Route::get('/', function () {
     return view('main');
 })->name('main');
 
-Route::get('/auctions', function () {
-    return view('auctions.index');
-})->name('auctions');
+//Route::get('/auctions', function () {
+//    return view('auctions.index');
+//})->name('auctions');
+
+Route::prefix('auctions')->group(function () {
+    Route::get('/', [AuctionsController::class, 'index'])->name('auctions.index');
+});
 
 Route::get('/products', function () {
     return view('products.index');
@@ -33,10 +37,6 @@ Route::get('/sellers', function () {
     return view('sellers.index');
 })->name('sellers');
 
-/*
-TODO:
-- merge layouts
-*/
 
 
 Route::prefix('seller')->group(function () {
@@ -91,8 +91,5 @@ Route::get('/dashboard', function () {
 Route::get('/api/search', [ProductsController::class, 'search'])
     ->middleware('purchaser')
     ->middleware('ajax');
-
-Route::get('/api/auctions', [AuctionsController::class, 'getAll'])
-            ->middleware('ajax');
 
 require __DIR__.'/auth.php';
