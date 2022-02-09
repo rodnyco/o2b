@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'seller' => \App\Http\Middleware\Seller::class,
         'purchaser' => \App\Http\Middleware\Purchaser::class,
+        'ajax' => \App\Http\Middleware\Ajax::class
     ];
 }
