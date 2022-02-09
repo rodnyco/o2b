@@ -6,16 +6,20 @@ use App\Models\Auction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 
 class AuctionsController extends Controller
 {
-    public function createForm(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function createForm(): Factory | View | Application
     {
         return view('purchaser.auctions.create');
     }
 
-    public function store(Request $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
+    public function store(Request $request): Redirector | Application | RedirectResponse
     {
         $request->validate([
             'product_id' => ['required'],
@@ -33,7 +37,7 @@ class AuctionsController extends Controller
         return redirect(route('purchaser.auctions'));
     }
 
-    public function index(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function index(Request $request): Factory | View | Application
     {
         $auctions = DB::table('auctions')
             ->join('products', 'auctions.product_id', '=', 'products.id')
