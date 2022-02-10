@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auction;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -50,9 +51,12 @@ class AuctionsController extends Controller
         return view('auctions.index', compact(['auctions', 'imgPlaceHolder']));
     }
 
-    public function auctionPage(Request $request, $id)
+    public function auctionPage(Request $request, Auction $auction)
     {
-        return view('auctions.page');
+        $product = Product::find($auction->product_id);
+        $imgPlaceHolder = asset('storage/placeholders/auction-image.png');
+
+        return view('auctions.page', compact(['auction', 'product', 'imgPlaceHolder']));
     }
 
 }
