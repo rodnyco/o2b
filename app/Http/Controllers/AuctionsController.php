@@ -50,4 +50,9 @@ class AuctionsController extends Controller
         return view('auctions.index', compact(['auctions', 'imgPlaceHolder']));
     }
 
+    public function auctionPage(Request $request, $id)
+    {
+        return view('auctions.page');
+    }
+
 }

@@ -27,6 +27,7 @@ Route::get('/', function () {
 
 Route::prefix('auctions')->group(function () {
     Route::get('/', [AuctionsController::class, 'index'])->name('auctions.index');
+    Route::get('/{id}', [AuctionsController::class, 'auctionPage'])->name('auction.page');
 });
 
 Route::get('/products', function () {
