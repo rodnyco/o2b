@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <div>
-        <div class="flex flex-col">
+        <div class="flex flex-col mb-8">
             <div class="mb-6 flex container columns-3">
                 <img src="{{ $imgPlaceHolder }}" class="w-1/6" alt="">
                 <div class="flex flex-col pl-6 w-4/6">
@@ -42,6 +42,12 @@
                     {{ $auction->description }}
                 </p>
             </div>
+        </div>
+        <div class="divide-y">
+            <div></div>
+        </div>
+        <div>
+            <h2 class="text-lg font-bold">Ставки</h2>
         </div>
     </div>
 </x-app-layout>
