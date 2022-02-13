@@ -27,6 +27,10 @@
                         </th>
                         <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Кол-во ставок
+                        </th>
+                        <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             Количество
                         </th>
                         <th
@@ -37,55 +41,74 @@
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             Дата создания
                         </th>
+                        <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Детально
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($auctions as $auction)
-                        <tr>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <div class="flex items-center">
-                                    <div class="ml-3">
+
+                            <tr>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <div class="flex items-center">
+                                            <div class="ml-3">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    {{ $auction->title  }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <p class="text-gray-900 whitespace-no-wrap">
-                                            {{ $auction->title  }}
+                                            {{ $auction->product_title  }}
                                         </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">
-                                    {{ $auction->product_title  }}
-                                </p>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">
-                                    {{ $auction->count . ' ' . $auction->product_unit  }}
-                                </p>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                @if($auction->status == 'opened')
-                                    <span
-                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                                        <span aria-hidden
-                                                              class="absolute inset-0 bg-green-200 opacity-50 rounded-full">
-                                                        </span>
-                                                        <span class="relative">Открыт</span>
-                                                    </span>
-                                @else
-                                    <span
-                                        class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <div class="flex items-center">
+                                            <div class="ml-3">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    {{ $auction->bets_count  }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <p class="text-gray-900 whitespace-no-wrap">
+                                            {{ $auction->count . ' ' . $auction->product_unit  }}
+                                        </p>
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        @if($auction->status == 'opened')
+                                            <span
+                                                class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                                             <span aria-hidden
-                                                                  class="absolute inset-0 bg-red-200 opacity-50 rounded-full">
+                                                                  class="absolute inset-0 bg-green-200 opacity-50 rounded-full">
                                                             </span>
-									                        <span class="relative">Закрыт</span>
-									                    </span>
-                                @endif
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">
-                                    {{ $auction->created_at  }}
-                                </p>
-                            </td>
-                        </tr>
+                                                            <span class="relative">Открыт</span>
+                                                        </span>
+                                        @else
+                                            <span
+                                                class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                                                <span aria-hidden
+                                                                      class="absolute inset-0 bg-red-200 opacity-50 rounded-full">
+                                                                </span>
+                                                                <span class="relative">Закрыт</span>
+                                                            </span>
+                                        @endif
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <p class="text-gray-900 whitespace-no-wrap">
+                                            {{ $auction->created_at  }}
+                                        </p>
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm ">
+                                        <a class="border-b-2 border-indigo-400 " href="{{  route('auction.page', [$auction->id])  }}">Перейти</a>
+                                    </td>
+                            </tr>
+                        </a>
+
                     @endforeach
                     </tbody>
                 </table>

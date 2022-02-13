@@ -46,7 +46,15 @@ class PurchaserController extends Controller
         $auctions = DB::table('auctions')
             ->where('purchaser_id', '=', Auth::guard('purchaser')->user()->id)
             ->join('products', 'auctions.product_id', '=', 'products.id')
-            ->select('auctions.*', 'products.title as product_title', 'products.unit as product_unit')
+            ->leftJoin('bets', 'auctions.id', '=', 'bets.auction_id')
+            ->select(
+                'auctions.*',
+                'products.title as product_title',
+                'products.unit as product_unit',
+                DB::raw("count(bets.id) as bets_count")
+            )
+            ->groupBy('auctions.id')
+            ->orderByDesc('created_at')
             ->get();
 
         return view('purchaser.auctions.index', compact('auctions'));
