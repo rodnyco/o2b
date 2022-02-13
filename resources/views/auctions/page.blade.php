@@ -31,7 +31,7 @@
                         </div>
                     @endif
                     <div class="pt-2">
-                        <p class="font-bold">Ставок: 21</p>
+                        <p class="font-bold">Ставок: {{  $auction->bets()->count()  }}</p>
                     </div>
                 </div>
 
