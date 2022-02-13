@@ -48,6 +48,12 @@
         </div>
         <div>
             <h2 class="font-bold text-xl mb-4">Ставки</h2>
+            @auth('seller')
+                @csrf
+                <new-bet-form create-route="{{ route('purchaser.auctions.create')  }}">
+
+                </new-bet-form>
+            @endauth
             <div class="divide-y-4 divide-slate-400/25">
                 @foreach($auction->bets as $bet)
                     <div class="rounded-md drop-shadow-xl border border-cyan-500">
@@ -80,3 +86,7 @@
         </div>
     </div>
 </x-app-layout>
+
+@auth('seller')
+    <script src="{{ asset('js/auctionBet.js') }}" defer></script>
+@endauth
