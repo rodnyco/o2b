@@ -28,6 +28,7 @@ class Auction extends Model
 
     public function bets(): HasMany
     {
-        return $this->hasMany(Bet::class);
+        return $this->hasMany(Bet::class)
+            ->orderBy('created_at', 'desc');
     }
 }
