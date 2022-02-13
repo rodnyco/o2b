@@ -47,10 +47,10 @@
             <div></div>
         </div>
         <div>
-            <h2 class="font-bold text-xl mb-4">Ставки</h2>
             @auth('seller')
+                <h2 class="font-bold text-xl mb-4">Добавить новую ставку</h2>
                 @csrf
-                <new-bet-form create-route="{{ route('purchaser.auctions.create')  }}">
+                <new-bet-form seller-id="{{ Auth::guard('seller')->user()->id }}" seller-name="{{ Auth::guard('seller')->user()->name }}" create-route="{{ route('purchaser.auctions.create')  }}" placeholder="{{ $imgPlaceHolder }}">
 
                 </new-bet-form>
             @endauth
