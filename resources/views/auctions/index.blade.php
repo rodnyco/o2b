@@ -6,7 +6,8 @@
     </x-slot>
     <div>
         @foreach ($auctions as $auction)
-            <div class="rounded-md mt-6 p-6 bg-slate-100 hover:bg-blue-200 drop-shadow-lg cursor-pointer">
+            <a href="{{  route('auction.page', [$auction->id])  }}">
+                <div class="rounded-md mt-6 p-6 bg-slate-100 hover:bg-blue-200 drop-shadow-lg cursor-pointer">
                 <div class="flex container columns-3">
                     <img src="{{ $imgPlaceHolder }}" class="w-1/6" alt="">
                     <div class="flex flex-col pl-6 w-4/6">
@@ -38,6 +39,7 @@
 
                 </div>
             </div>
+            </a>
         @endforeach
     </div>
 </x-app-layout>

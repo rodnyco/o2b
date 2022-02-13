@@ -18,4 +18,5 @@ mix.js('resources/js/app.js', 'public/js').vue().postCss('resources/css/app.css'
 ]);
 
 mix.js('resources/js/auctionCreate.js', 'public/js').vue();
-mix.js('resources/js/auctionList.js', 'public/js').vue();
+//mix.js('resources/js/auctionList.js', 'public/js').vue();
+mix.js('resources/js/auctionBet.js', 'public/js').vue();
