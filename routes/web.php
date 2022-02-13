@@ -1,32 +1,27 @@
 <?php
 
+use App\Http\Controllers\BetController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\PurchaserController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\AuctionsController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('main');
 })->name('main');
 
-//Route::get('/auctions', function () {
-//    return view('auctions.index');
-//})->name('auctions');
-
 Route::prefix('auctions')->group(function () {
-    Route::get('/', [AuctionsController::class, 'index'])->name('auctions.index');
+    Route::get('/', [AuctionsController::class, 'index'])
+        ->name('auctions.index');
+    Route::get('/{auction}', [AuctionsController::class, 'auctionPage'])
+        ->name('auction.page');
+});
+
+Route::prefix('bet')->group(function () {
+    Route::post('/create', [BetController::class, 'store'])
+        ->name('bet.create')
+        ->middleware('seller');
 });
 
 Route::get('/products', function () {

@@ -11,7 +11,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('auctions.index')" :active="request()->routeIs('auctions.index')">
+                    <x-nav-link :href="route('auctions.index')" :active="request()->routeIs('auctions.index', 'auction.page')">
                         {{ __('Аукционы') }}
                     </x-nav-link>
                     <x-nav-link :href="route('products')" :active="request()->routeIs('products')">
