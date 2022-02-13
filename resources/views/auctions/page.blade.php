@@ -50,13 +50,13 @@
             @auth('seller')
                 <h2 class="font-bold text-xl mb-4">Добавить новую ставку</h2>
                 @csrf
-                <new-bet-form seller-id="{{ Auth::guard('seller')->user()->id }}" seller-name="{{ Auth::guard('seller')->user()->name }}" create-route="{{ route('purchaser.auctions.create')  }}" placeholder="{{ $imgPlaceHolder }}">
+                <new-bet-form auction-id="{{ $auction->id }}" seller-id="{{ Auth::guard('seller')->user()->id }}" seller-name="{{ Auth::guard('seller')->user()->name }}" create-route="{{ route('bet.create')  }}" placeholder="{{ $imgPlaceHolder }}">
 
                 </new-bet-form>
             @endauth
             <div class="divide-y-4 divide-slate-400/25">
                 @foreach($auction->bets as $bet)
-                    <div class="rounded-md drop-shadow-xl border border-cyan-500">
+                    <div class="rounded-md drop-shadow-xl border border-cyan-500 mb-8">
                         <div class="p-3 font-bold bg-cyan-500 rounded-md text-white">
                             <h3>Ставка № {{ $bet->id }} </h3>
                             <div class="text-3xl">{{ number_format($bet->price, 2)  }} ₽</div>

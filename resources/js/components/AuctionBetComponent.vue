@@ -1,5 +1,7 @@
 <template>
-    <form action="">
+    <form :action="createRoute" method="POST">
+        <input type="hidden" name="_token" :value="csrf">
+        <input type="hidden" name="auction_id" :value="auctionId">
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="price">
                 Цена
@@ -11,6 +13,11 @@
                 Описание
             </label>
             <textarea v-model="description" name="description" id="description" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" rows="5"></textarea>
+        </div>
+        <div class="mb-4">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Сделать ставку
+            </button>
         </div>
     </form>
     <div class="rounded-md drop-shadow-xl border border-cyan-500 mb-6">
@@ -41,11 +48,12 @@
 
 <script>
 export default {
-    props: ['createRoute', 'sellerName', 'placeholder', 'sellerId'],
+    props: ['createRoute', 'sellerName', 'placeholder', 'sellerId', 'auctionId'],
     data () {
         return {
             description: 'Расскажите об основных приемущества вашего товара',
-            price: 300.00
+            price: 300.00,
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         }
     },
 }
