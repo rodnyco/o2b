@@ -59,6 +59,9 @@
                         <div class="p-3 font-bold bg-cyan-500 rounded-md text-white">
                             <h3>Ставка № {{ $bet->id }} </h3>
                             <div class="text-3xl">{{ number_format($bet->price, 2)  }} ₽</div>
+                            @if($isOwner)
+                                Сделать лидером
+                            @endif
                         </div>
                         <div class="p-3 flex">
                             <img src="{{ $imgPlaceHolder }}" class="w-1/3" alt="">

@@ -61,9 +61,13 @@ class AuctionsController extends Controller
     public function auctionPage(Request $request, Auction $auction)
     {
         $product = Product::find($auction->product_id);
+        $isOwner = false;
+        if(Auth::guard('purchaser')->check()) {
+            $isOwner = ($auction->purchaser_id == Auth::guard('purchaser')->user()->id);
+        }
         $imgPlaceHolder = asset('storage/placeholders/auction-image.png');
 
-        return view('auctions.page', compact(['auction', 'product', 'imgPlaceHolder']));
+        return view('auctions.page', compact(['auction', 'product', 'imgPlaceHolder', 'isOwner']));
     }
 
 }
