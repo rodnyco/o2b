@@ -40,40 +40,47 @@
                 </new-bet-form>
             @endauth
             <div class="divide-y-4 divide-slate-400/25">
-                @foreach($auction->bets as $bet)
-                    <div class="rounded-md drop-shadow-xl border border-cyan-500 mb-8">
-                        <div class="p-3 font-bold bg-cyan-500 rounded-md text-white flex">
-                            <div class="w-5/6">
-                                <h3>Ставка № {{ $bet->id }} </h3>
-                                <div class="text-3xl">{{ number_format($bet->price, 2)  }} ₽</div>
-                            </div>
-                            @if($isOwner)
-                                <div class="w-1/6 text-center">
-                                    Сделать лидером
+                    @foreach($auction->bets as $bet)
+                        @php
+                            $color = "cyan-500";
+                            if($auction->leader()->exists() && $bet->id == $auction->leader->bet->id) {
+                                $color = "amber-300";
+                            }
+                        @endphp
+                        <div class="rounded-md drop-shadow-xl border border-{{$color}} mb-8">
+                                <div class="p-3 font-bold bg-{{$color}} rounded-md text-white flex">
+                                    <div class="w-5/6">
+                                        <h3>Ставка № {{ $bet->id }} </h3>
+                                        <div class="text-3xl">{{ number_format($bet->price, 2)  }} ₽</div>
+                                    </div>
+                                    @if($isOwner)
+                                        <button class="w-1/6 bg-transparent hover:bg-white text-white  font-semibold hover:text-cyan-500 py-2 px-4 border border-white hover:border-transparent rounded">
+                                            Сделать лидером
+                                        </button>
+                                    @endif
                                 </div>
-                            @endif
-                        </div>
-                        <div class="p-3 flex">
-                            <img src="{{ $imgPlaceHolder }}" class="w-1/3" alt="">
-                            <div class="w-2/3 m-3">
-                                <div>
-                                    <dvi>
-                                        Продавец: <span class="font-bold">{{ $bet->seller->name }}</span>
-                                    </dvi>
+
+                            <div class="p-3 flex">
+                                <img src="{{ $imgPlaceHolder }}" class="w-1/3" alt="">
+                                <div class="w-2/3 m-3">
                                     <div>
-                                        Дата: <span class="font-bold">{{ $bet->created_at }}</span>
+                                        <dvi>
+                                            Продавец: <span class="font-bold">{{ $bet->seller->name }}</span>
+                                        </dvi>
+                                        <div>
+                                            Дата: <span class="font-bold">{{ $bet->created_at }}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div >
-                                    <span class="font-bold"> Описание: </span>
-                                    <div class="max-h-36 overflow-auto">
-                                        {{ $bet->description }}
+                                    <div >
+                                        <span class="font-bold"> Описание: </span>
+                                        <div class="max-h-36 overflow-auto">
+                                            {{ $bet->description }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
             </div>
         </div>
     </div>
