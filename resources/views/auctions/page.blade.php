@@ -12,7 +12,13 @@
                     <h3 class="text-3xl">{{ $auction->title }}</h3>
                     <div>Товар: <span class="font-bold">{{ $product->title }}</span></div>
                     <div>Количество: <span class="font-bold">{{ $auction->count . ' ' . $auction->product_unit }}</span></div>
-                    <div>Лидирующая ставка: <span class="font-bold">40.000 ₽</span></div>
+                    <div>Лидирующая ставка:
+                        @if($auction->leader()->exists())
+                            <span class="font-bold">{{  $auction->leader->bet->price }} ₽</span>
+                        @else
+                            <span class="font-bold">0 ₽</span>
+                        @endif
+                    </div>
                 </div>
                 <div class="flex flex-col pl-6 w-1/6 items-center">
                     @if($auction->status == 'opened')
@@ -43,6 +49,7 @@
                 </p>
             </div>
         </div>
+
         <div class="divide-y">
             <div></div>
         </div>
@@ -56,11 +63,15 @@
             <div class="divide-y-4 divide-slate-400/25">
                 @foreach($auction->bets as $bet)
                     <div class="rounded-md drop-shadow-xl border border-cyan-500 mb-8">
-                        <div class="p-3 font-bold bg-cyan-500 rounded-md text-white">
-                            <h3>Ставка № {{ $bet->id }} </h3>
-                            <div class="text-3xl">{{ number_format($bet->price, 2)  }} ₽</div>
+                        <div class="p-3 font-bold bg-cyan-500 rounded-md text-white flex">
+                            <div class="w-5/6">
+                                <h3>Ставка № {{ $bet->id }} </h3>
+                                <div class="text-3xl">{{ number_format($bet->price, 2)  }} ₽</div>
+                            </div>
                             @if($isOwner)
-                                Сделать лидером
+                                <div class="w-1/6 text-center">
+                                    Сделать лидером
+                                </div>
                             @endif
                         </div>
                         <div class="p-3 flex">

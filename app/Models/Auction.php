@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Auction extends Model
 {
@@ -30,5 +31,11 @@ class Auction extends Model
     {
         return $this->hasMany(Bet::class)
             ->orderBy('created_at', 'desc');
+    }
+
+    public function leader(): HasOne
+    {
+        return $this->hasOne(Leader::class)
+            ->latest();
     }
 }
