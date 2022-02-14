@@ -40,19 +40,7 @@ class AuctionsController extends Controller
 
     public function index(Request $request): Factory | View | Application
     {
-        $auctions = DB::table('auctions')
-            ->join('products', 'auctions.product_id', '=', 'products.id')
-            ->leftJoin('bets', 'auctions.id', '=', 'bets.auction_id')
-            ->select(
-                'auctions.*',
-                'products.title as product_title',
-                'products.unit as product_unit',
-                DB::raw("count(bets.id) as bets_count")
-            )
-            ->orderByDesc('created_at')
-            ->groupBy('auctions.id')
-            ->get();
-
+        $auctions = Auction::all();
         $imgPlaceHolder = asset('storage/placeholders/auction-image.png');
 
         return view('auctions.index', compact(['auctions', 'imgPlaceHolder']));

@@ -6,42 +6,21 @@
     </x-slot>
     <div>
         <div class="flex flex-col mb-8">
-            <div class="mb-6 flex container columns-3">
-                <img src="{{ $imgPlaceHolder }}" class="w-1/6" alt="">
-                <div class="flex flex-col pl-6 w-4/6">
-                    <h3 class="text-3xl">{{ $auction->title }}</h3>
-                    <div>Товар: <span class="font-bold">{{ $product->title }}</span></div>
-                    <div>Количество: <span class="font-bold">{{ $auction->count . ' ' . $auction->product_unit }}</span></div>
-                    <div>Лидирующая ставка:
-                        @if($auction->leader()->exists())
-                            <span class="font-bold">{{  $auction->leader->bet->price }} ₽</span>
-                        @else
-                            <span class="font-bold">0 ₽</span>
-                        @endif
-                    </div>
-                </div>
-                <div class="flex flex-col pl-6 w-1/6 items-center">
-                    @if($auction->status == 'opened')
-                        <div class="flex justify-center">
-                                <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                    <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                    <span class="relative">Открыт</span>
-                                </span>
-                        </div>
-                    @else
-                        <div class="flex justify-center">
-                                <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                    <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-									<span class="relative">Закрыт</span>
-								</span>
-                        </div>
-                    @endif
-                    <div class="pt-2">
-                        <p class="font-bold">Ставок: {{  $auction->bets()->count()  }}</p>
-                    </div>
-                </div>
-
-            </div>
+            @php
+                $leaderPrice = 0;
+                if($auction->leader()->exists()) {
+                    $leaderPrice = $auction->leader->bet->price;
+                }
+            @endphp
+            <x-elements.auction-card
+                image="{{ $imgPlaceHolder }}"
+                auctionTitle="{{ $auction->title }}"
+                auctionStatus="{{ $auction->status }}"
+                betsCount="{{  $auction->bets()->count()  }}"
+                betLeader="{{  $leaderPrice  }}"
+                productTitle="{{ $product->title }}"
+                productCount="{{ $auction->count . ' ' . $auction->product_unit }}"
+            ></x-elements.auction-card>
             <div>
                 <span class="font-bold">Требования:</span>
                 <p>

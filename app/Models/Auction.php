@@ -33,6 +33,11 @@ class Auction extends Model
             ->orderBy('created_at', 'desc');
     }
 
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
     public function leader(): HasOne
     {
         return $this->hasOne(Leader::class)
